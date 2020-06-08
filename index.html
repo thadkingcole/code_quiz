@@ -9,7 +9,8 @@
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <!-- MY CSS -->
+  
+    <!-- MY CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -23,8 +24,9 @@
   </header>
 
   <main class="container">
+
+    <!-- Intro Screen -->
     <div id="intro" class="row">
-      <!-- Intro Screen -->
       <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
         <!-- Intro Statement -->
         <h1 class="text-center">Coding Quiz Challenge</h1>
@@ -37,33 +39,75 @@
       </div>
     </div>
 
+    <!-- Quiz Screen(s) -->
     <div id="quiz" class="row">
-      <!-- Quiz Screen(s) -->
       <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
         <!-- Question -->
-        <h1 id="question">What is a placeholder question?</h1>
-        <!-- Answers -->
-        <button id="ans0" type="button" class="btn btn-primary my-1">answer 1</button><br>
-        <button id="ans1" type="button" class="btn btn-primary my-1">answer 2</button><br>
-        <button id="ans2" type="button" class="btn btn-primary my-1">answer 3</button><br>
-        <button id="ans3" type="button" class="btn btn-primary my-1">answer 4</button><br>
-        <!-- Last Question Feedback (correct/wrong) -->
+        <h2 id="question">What is a placeholder question?</h1>
+          <!-- Answers -->
+          <button id="ans0" type="button" class="btn btn-primary my-1">answer 1</button><br>
+          <button id="ans1" type="button" class="btn btn-primary my-1">answer 2</button><br>
+          <button id="ans2" type="button" class="btn btn-primary my-1">answer 3</button><br>
+          <button id="ans3" type="button" class="btn btn-primary my-1">answer 4</button>
+          <hr>
+          <p id="feedback">last question feedback</p>
+          <!-- Last Question Feedback (correct/wrong) -->
       </div>
     </div>
 
     <!-- End of Quiz Screen -->
-    <!-- User Score -->
-    <!-- Enter Initials -->
+    <div id="end" class="row">
+      <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
+        <h3>All done!</h3>
+        <!-- User Score -->
+        <p>Your final score is XX.</p>
+        <!-- Enter Initials -->
+        <form class="form-inline">
+          <label for="initials">Enter initials:</label>
+          <input type="text" class="form-control mx-1" placeholder="abc" id="initials">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
 
     <!-- High Scores -->
-    <!-- Go Back/Home Button -->
-    <!-- Clear High Scores-->
+    <div id="highscores" class="row">
+      <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
+        <!-- <h4 class="text-center">Highscores</h4> -->
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th class="text-center">Highscores</th>
+            </tr>
+          </thead>
+          <tbody id="scores">
+            <!-- <tr>
+              <td>tjc</td>
+              <td>69</td>
+            </tr>
+            <tr>
+              <td>sas</td>
+              <td>18</td>
+            </tr>
+            <tr>
+              <td>ljc</td>
+              <td>12</td>
+            </tr>
+            <tr>
+              <td>lol</td>
+              <td>0</td>
+            </tr> -->
+          </tbody>
+        </table>
+        <!-- Go Back/Home Button -->
+        <button type="button" class="btn btn-primary">Go Back</button>
+        <!-- Clear High Scores-->
+        <button type="button" class="btn btn-primary">Clear Highscores</button>
+      </div>
+    </div>
   </main>
 
-  <!-- Get first question looking the way I want -->
-  <!-- Add in additional questions using DOM API -->
-
-  <!-- Link to JavaScript -->
+  <!-- My JavaScript -->
   <script src="script.js"></script>
 </body>
 

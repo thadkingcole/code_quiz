@@ -15,9 +15,9 @@
   once quiz ends, user's score will be displayed along with a form to enter intials
 
   submiting initials will display high scores,
-  a [Try Again] button, and a [Clear High Scores] button
+  a [Go Back] button, and a [Clear High Scores] button
 
-  [Try Again] will start the quiz again
+  [Go Back] will show intro page
   [Clear High Scores] will remove all high scores
 
   -----TODO LIST-----
@@ -102,5 +102,5 @@ function startQuiz() {
       clearInterval(timerInterval);
       endQuiz();
     }
-  }, 1000)
+  }, 1000);
 }
