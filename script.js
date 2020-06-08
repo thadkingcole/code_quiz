@@ -21,11 +21,11 @@
   [Clear High Scores] will remove all high scores
 
   -----TODO LIST-----
-  TODO: create question objects with a question string & array of 4 or 5 answers
+  INPRO: create question objects with a question string & array of 4 or 5 answers
   TODO: create/find coding questions
   TODO: create timer
   TODO: create function for starting quiz
-  TODO: create function to display question
+  DONE: create function to display question
   TODO: create function for correct answer response
   TODO: create function for incorrect answer response
   TODO: create function for end of game
@@ -42,6 +42,7 @@ const question1 = {
   correctAns: "alerts"
 }
 
+
 function displayQ (question) {
   // display question text
   document.getElementById("question").textContent = question.mark;
@@ -52,13 +53,31 @@ function displayQ (question) {
   // answers is array with correct answer randomly inserted to question.wrongAns
   let answers = question.wrongAns;
   answers.splice(ansPos, 0, question.correctAns);
-  console.log(answers);
-  // random sort of answers
+  
+  // answers randomly shuffled
   answers.sort(function(a, b){return 0.5 - Math.random()});
-  console.log(answers);
 
   // display answers in buttons
   for (let i = 0; i < answers.length; i++) {
     document.getElementById("ans" + i).textContent = answers[i];
   }
+}
+
+
+function startQuiz () {
+  const rows = document.getElementsByClassName("row");
+  // each row is a different "screen"
+  // rows[0] is Intro screen
+  // rows[1] is Quiz screen
+  // rows[2] is End of Quiz screen
+  // rows[3] is High Scores screen
+  for (i = 0; i < rows.length; i++) {
+    if (i === 1) {
+      // bootstrap rows use flex, displays quiz screen
+      rows[i].style.display = "flex";
+    } else { // hides all other screens
+    rows[i].style.display = "none";
+    }
+  }
+  // start timer
 }
