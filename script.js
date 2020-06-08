@@ -21,29 +21,37 @@
   [Clear High Scores] will remove all high scores
 
   -----TODO LIST-----
-  INPRO: create question objects with a question string & array of 4 or 5 answers
-  TODO: create/find coding questions
-  TODO: create timer
-  TODO: create function for starting quiz
+  doing: create question objects with a question string & array of 4 or 5 answers
+  todo: create/find coding questions
+  DONE: create timer
+  DONE: create function for starting quiz
   DONE: create function to display question
-  TODO: create function for correct answer response
-  TODO: create function for incorrect answer response
-  TODO: create function for end of game
-  TODO: create function for entering high score initials
-  TODO: create function for displaying high scores
-  TODO: create function for erasing high scores
+  todo: create function for correct answer response
+  todo: create function for incorrect answer response
+  doing: create function for end of game
+  todo: create function for entering high score initials
+  todo: create function for displaying high scores
+  todo: create function for erasing high scores
 */
 
+// GLOBAL VARIABLES
 const question1 = {
   mark: "Commonly used data types DO NOT include:",
-  wrongAns: ["strings",
-             "booleans",
-             "numbers"],
+  wrongAns: [
+    "strings",
+    "booleans",
+    "numbers"
+  ],
   correctAns: "alerts"
-}
+},
+timerEl = document.getElementById("timer");
+
+let timer = 75;
 
 
-function displayQ (question) {
+
+// FUNCTIONS
+function displayQ(question) {
   // display question text
   document.getElementById("question").textContent = question.mark;
 
@@ -53,9 +61,9 @@ function displayQ (question) {
   // answers is array with correct answer randomly inserted to question.wrongAns
   let answers = question.wrongAns;
   answers.splice(ansPos, 0, question.correctAns);
-  
+
   // answers randomly shuffled
-  answers.sort(function(a, b){return 0.5 - Math.random()});
+  answers.sort(function (a, b) { return 0.5 - Math.random() });
 
   // display answers in buttons
   for (let i = 0; i < answers.length; i++) {
@@ -64,7 +72,12 @@ function displayQ (question) {
 }
 
 
-function startQuiz () {
+function endQuiz() {
+  console.log("END OF QUIZ");
+}
+
+
+function startQuiz() {
   const rows = document.getElementsByClassName("row");
   // each row is a different "screen"
   // rows[0] is Intro screen
@@ -76,8 +89,18 @@ function startQuiz () {
       // bootstrap rows use flex, displays quiz screen
       rows[i].style.display = "flex";
     } else { // hides all other screens
-    rows[i].style.display = "none";
+      rows[i].style.display = "none";
     }
   }
   // start timer
+  timer = 75;
+  timerEl.textContent = "Time: " + timer;
+  const timerInterval = setInterval(function () {
+    timer--;
+    timerEl.textContent = "Time: " + timer;
+    if (timer === 0) {
+      clearInterval(timerInterval);
+      endQuiz();
+    }
+  }, 1000)
 }
