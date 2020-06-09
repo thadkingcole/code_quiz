@@ -21,30 +21,89 @@
   [Clear High Scores] will remove all high scores
 
   -----TODO LIST-----
-  doing: create question objects with a question string & array of 4 or 5 answers
-  todo: create/find coding questions
+  doin: create question objects with a question string & array of 4 or 5 answers
+  doin: create/find coding questions
   DONE: create timer
   DONE: create function for starting quiz
   DONE: create function to display question
-  todo: create function for correct answer response
-  todo: create function for incorrect answer response
-  doing: create function for end of game
+  doin: create function for correct answer response
+  doin: create function for incorrect answer response
+  doin: create function for end of game
   todo: create function for entering high score initials
   todo: create function for displaying high scores
   todo: create function for erasing high scores
 */
 
 // GLOBAL VARIABLES
-const question1 = {
-  mark: "Commonly used data types DO NOT include:",
-  wrongAns: [
-    "strings",
-    "booleans",
-    "numbers"
-  ],
-  correctAns: "alerts"
+const qs = { // questions
+  q1: {
+    mark: "Commonly used data types DO NOT include:",
+    wrongAns: [
+      "strings",
+      "booleans",
+      "numbers"
+    ],
+    correctAns: "alerts",
+    asked: false,
+    orderMatters: false
+  },
+  q2: {
+    mark: "The condition in an if/else statement is enclosed within _________.",
+    wrongAns: [
+      "quotes",
+      "parentheses",
+      "square brackets"
+    ],
+    correctAns: "curley brackets",
+    asked: false,
+    orderMatters: false
+  },
+  q3: {
+    mark: "Arrays in JavaScript can be used to store _________.",
+    wrongAns: [
+      "numbers and strings",
+      "other arrays",
+      "booleans",
+    ],
+    correctAns: "all of the above",
+    asked: false,
+    orderMatters: true
+  },
+  q4: {
+    mark: "String values must be enclosed within _________ when being assigned to variables.",
+    wrongAns: [
+      "commas",
+      "curley brackets",
+      "paratheses",
+    ],
+    correctAns: "quotes",
+    asked: false,
+    orderMatters: false
+  },
+  q5: {
+    mark: "A very useful tool used during development and debugging for printing content to the debugger is:",
+    wrongAns: [
+      "JavaScript",
+      "terminal/bash",
+      "for loops",
+    ],
+    correctAns: "console.log()",
+    asked: false,
+    orderMatters: false
+  },
 },
-timerEl = document.getElementById("timer");
+  // Elements
+  timerEl = document.getElementById("timer"),
+  // Buttons
+  startBtnEl = document.getElementById("start"),
+  initialsBtnEl = document.getElementById("initials"),
+  homeBtnEl = document.getElementById("home"),
+  clearBtnEl = document.getElementById("clear"),
+  // Screens
+  introEl = document.getElementById("intro"),
+  quizEl = document.getElementById("quiz"),
+  endEl = document.getElementById("end"),
+  highscoresEl = document.getElementById("highscores");
 
 let timer = 75;
 
@@ -54,21 +113,50 @@ let timer = 75;
 function displayQ(question) {
   // display question text
   document.getElementById("question").textContent = question.mark;
-
-  // ansPos is random number between 0 & index of answers for each question
-  const ansPos = Math.floor(Math.random() * question.wrongAns.length);
-
-  // answers is array with correct answer randomly inserted to question.wrongAns
   let answers = question.wrongAns;
-  answers.splice(ansPos, 0, question.correctAns);
+  if (question.orderMatters) {
+    // shuffles answers
+    answers.sort(function (a, b) { return 0.5 - Math.random(); });
 
-  // answers randomly shuffled
-  answers.sort(function (a, b) { return 0.5 - Math.random() });
+    // display answers in buttons
+    for (let i = 0; i < answers.length; i++) {
+      document.getElementById(`ans${i}`).textContent = answers[i];
+    }
 
-  // display answers in buttons
-  for (let i = 0; i < answers.length; i++) {
-    document.getElementById("ans" + i).textContent = answers[i];
+    // ensures "all of the above" type answers are is last answer
+    document.getElementById(`ans${answers.length}`).textContent =
+      question.correctAns;
+  } else { // order doesn't matter, shuffle all answers
+    // ansPos is random number between 0 & index of answers for each question
+    const ansPos = Math.floor(Math.random() * question.wrongAns.length);
+
+    // answers is array with correct answer randomly inserted to question.wrongAns
+    answers.splice(ansPos, 0, question.correctAns);
+
+    // answers randomly shuffled
+    answers.sort(function (a, b) { return 0.5 - Math.random(); });
+
+    // display answers in buttons
+    for (let i = 0; i < answers.length; i++) {
+      document.getElementById(`ans${i}`).textContent = answers[i];
+    }
   }
+  // mark question as asked
+  question.asked = true;
+
+  // check answer
+  quizEl.addEventListener("click", function (event) {
+    if (event.target.matches("button")) {
+      const selectedAns = event.target.textContent;
+      const feedback = document.getElementById("feedback");
+      if (selectedAns === question.correctAns) {
+        feedback.textContent = "correct!"
+      } else {
+        feedback.textContent =
+          `wrong, the correct answer was ${question.correctAns}`;
+      }
+    }
+  });
 }
 
 
@@ -78,29 +166,27 @@ function endQuiz() {
 
 
 function startQuiz() {
-  const rows = document.getElementsByClassName("row");
-  // each row is a different "screen"
-  // rows[0] is Intro screen
-  // rows[1] is Quiz screen
-  // rows[2] is End of Quiz screen
-  // rows[3] is High Scores screen
-  for (i = 0; i < rows.length; i++) {
-    if (i === 1) {
-      // bootstrap rows use flex, displays quiz screen
-      rows[i].style.display = "flex";
-    } else { // hides all other screens
-      rows[i].style.display = "none";
-    }
-  }
+  // bootstrap rows use flex, displays quiz screen
+  quizEl.style.display = "flex";
+  // hides all other screens
+  introEl.style.display = "none";
+  endEl.style.display = "none";
+  highscoresEl.style.display = "none";
   // start timer
   timer = 75;
-  timerEl.textContent = "Time: " + timer;
+  timerEl.textContent = `Time: ${timer}`;
   const timerInterval = setInterval(function () {
     timer--;
-    timerEl.textContent = "Time: " + timer;
+    timerEl.textContent = `Time: ${timer}`;
     if (timer === 0) {
       clearInterval(timerInterval);
       endQuiz();
     }
   }, 1000);
+  displayQ(qs.q1);
 }
+
+
+// EVENT LISTENERS
+startBtnEl.addEventListener("click", startQuiz);
+
