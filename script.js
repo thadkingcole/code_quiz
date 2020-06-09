@@ -21,14 +21,14 @@
   [Clear High Scores] will remove all high scores
 
   -----TODO LIST-----
-  doin: create question objects with a question string & array of 4 or 5 answers
+  doin: create question objects with a question string & array of 4 answers
   doin: create/find coding questions
   DONE: create timer
   DONE: create function for starting quiz
   DONE: create function to display question
-  doin: create function for correct answer response
-  doin: create function for incorrect answer response
-  doin: create function for end of game
+  DONE: create function for correct answer response
+  DONE: create function for incorrect answer response
+  DONE: create function for end of game
   todo: create function for entering high score initials
   todo: create function for displaying high scores
   todo: create function for erasing high scores
@@ -36,7 +36,7 @@
 
 // GLOBAL VARIABLES
 const questions = { // questions
-  1: {
+  0: {
     mark: "Commonly used data types DO NOT include:",
     wrongAns: [
       "strings",
@@ -47,45 +47,45 @@ const questions = { // questions
     asked: false,
     orderMatters: false
   },
-  2: {
+  1: {
     mark: "The condition in an if/else statement is enclosed within _________.",
     wrongAns: [
       "quotes",
-      "parentheses",
+      "curley brackets",
       "square brackets"
     ],
-    correctAns: "curley brackets",
+    correctAns: "parentheses",
     asked: false,
     orderMatters: false
   },
-  3: {
+  2: {
     mark: "Arrays in JavaScript can be used to store _________.",
     wrongAns: [
       "numbers and strings",
       "other arrays",
-      "booleans",
+      "booleans"
     ],
     correctAns: "all of the above",
     asked: false,
     orderMatters: true
   },
-  4: {
+  3: {
     mark: "String values must be enclosed within _________ when being assigned to variables.",
     wrongAns: [
       "commas",
       "curley brackets",
-      "paratheses",
+      "paratheses"
     ],
     correctAns: "quotes",
     asked: false,
     orderMatters: false
   },
-  5: {
+  4: {
     mark: "A very useful tool used during development and debugging for printing content to the debugger is:",
     wrongAns: [
       "JavaScript",
       "terminal/bash",
-      "for loops",
+      "for loops"
     ],
     correctAns: "console.log()",
     asked: false,
@@ -106,7 +106,8 @@ const questions = { // questions
   highscoresEl = document.getElementById("highscores");
 
 let timer = 75,
-  num = 1;
+  num = 0,
+  score = 0;
 
 
 // FUNCTIONS
@@ -143,13 +144,18 @@ function displayQ(question) {
   }
   // mark question as asked
   question.asked = true;
-
-  // check answer
 }
 
 
 function endQuiz() {
-  console.log("END OF QUIZ");
+  // display end screen
+  endEl.style.display = "flex";
+  // hide all other screens
+  introEl.style.display = "none";
+  quizEl.style.display = "none";
+  highscoresEl.style.display = "none";
+  document.getElementById("final-score").textContent =
+    `Your final score is ${timer}`;
 }
 
 
@@ -169,6 +175,10 @@ function startQuiz() {
     if (timer === 0) {
       clearInterval(timerInterval);
       endQuiz();
+    } else if (!questions[num]) {
+      score += timer;
+      clearInterval(timerInterval);
+
     }
   }, 1000);
   displayQ(questions[num]);
@@ -183,9 +193,11 @@ quizEl.addEventListener("click", function (event) {
     const feedback = document.getElementById("feedback");
     if (selectedAns === questions[num].correctAns) {
       feedback.textContent = "correct!";
+      score += 10;
     } else {
       feedback.textContent =
-        `wrong, the correct answer was ${questions[num].correctAns}`;
+        `wrong, the correct answer was ${questions[num].correctAns}.`;
+      timer -= 10;
     }
     num++;
     if (questions[num]) {
