@@ -120,11 +120,11 @@ function displayQ(question) {
 
     // display answers in buttons
     for (let i = 0; i < answers.length; i++) {
-      document.getElementById(`ans${i}`).textContent = answers[i];
+      document.getElementById(`answer${i}`).textContent = answers[i];
     }
 
     // ensures "all of the above" type answers are is last answer
-    document.getElementById(`ans${answers.length}`).textContent =
+    document.getElementById(`answer${answers.length}`).textContent =
       question.correctAns;
   } else { // order doesn't matter, shuffle all answers
     // ansPos is random number between 0 & index of answers for each question
@@ -138,7 +138,7 @@ function displayQ(question) {
 
     // display answers in buttons
     for (let i = 0; i < answers.length; i++) {
-      document.getElementById(`ans${i}`).textContent = answers[i];
+      document.getElementById(`answer${i}`).textContent = answers[i];
     }
   }
   // mark question as asked
@@ -150,7 +150,7 @@ function displayQ(question) {
       const selectedAns = event.target.textContent;
       const feedback = document.getElementById("feedback");
       if (selectedAns === question.correctAns) {
-        feedback.textContent = "correct!"
+        feedback.textContent = "correct!";
       } else {
         feedback.textContent =
           `wrong, the correct answer was ${question.correctAns}`;
