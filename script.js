@@ -35,8 +35,8 @@
 */
 
 // GLOBAL VARIABLES
-const qs = { // questions
-  q1: {
+const questions = { // questions
+  1: {
     mark: "Commonly used data types DO NOT include:",
     wrongAns: [
       "strings",
@@ -47,7 +47,7 @@ const qs = { // questions
     asked: false,
     orderMatters: false
   },
-  q2: {
+  2: {
     mark: "The condition in an if/else statement is enclosed within _________.",
     wrongAns: [
       "quotes",
@@ -58,7 +58,7 @@ const qs = { // questions
     asked: false,
     orderMatters: false
   },
-  q3: {
+  3: {
     mark: "Arrays in JavaScript can be used to store _________.",
     wrongAns: [
       "numbers and strings",
@@ -69,7 +69,7 @@ const qs = { // questions
     asked: false,
     orderMatters: true
   },
-  q4: {
+  4: {
     mark: "String values must be enclosed within _________ when being assigned to variables.",
     wrongAns: [
       "commas",
@@ -80,7 +80,7 @@ const qs = { // questions
     asked: false,
     orderMatters: false
   },
-  q5: {
+  5: {
     mark: "A very useful tool used during development and debugging for printing content to the debugger is:",
     wrongAns: [
       "JavaScript",
@@ -105,8 +105,8 @@ const qs = { // questions
   endEl = document.getElementById("end"),
   highscoresEl = document.getElementById("highscores");
 
-let timer = 75;
-
+let timer = 75,
+  num = 1;
 
 
 // FUNCTIONS
@@ -145,18 +145,6 @@ function displayQ(question) {
   question.asked = true;
 
   // check answer
-  quizEl.addEventListener("click", function (event) {
-    if (event.target.matches("button")) {
-      const selectedAns = event.target.textContent;
-      const feedback = document.getElementById("feedback");
-      if (selectedAns === question.correctAns) {
-        feedback.textContent = "correct!";
-      } else {
-        feedback.textContent =
-          `wrong, the correct answer was ${question.correctAns}`;
-      }
-    }
-  });
 }
 
 
@@ -183,10 +171,28 @@ function startQuiz() {
       endQuiz();
     }
   }, 1000);
-  displayQ(qs.q1);
+  displayQ(questions[num]);
 }
 
 
 // EVENT LISTENERS
 startBtnEl.addEventListener("click", startQuiz);
+quizEl.addEventListener("click", function (event) {
+  if (event.target.matches("button")) {
+    const selectedAns = event.target.textContent;
+    const feedback = document.getElementById("feedback");
+    if (selectedAns === questions[num].correctAns) {
+      feedback.textContent = "correct!";
+    } else {
+      feedback.textContent =
+        `wrong, the correct answer was ${questions[num].correctAns}`;
+    }
+    num++;
+    if (questions[num]) {
+      displayQ(questions[num])
+    } else {
+      endQuiz();
+    }
+  }
+});
 
