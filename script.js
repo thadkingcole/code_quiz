@@ -193,7 +193,6 @@ quizEl.addEventListener("click", function (event) {
     const feedback = document.getElementById("feedback");
     if (selectedAns === questions[num].correctAns) {
       feedback.textContent = "correct!";
-      score += 10;
     } else {
       feedback.textContent =
         `wrong, the correct answer was ${questions[num].correctAns}.`;
