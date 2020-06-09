@@ -149,7 +149,7 @@ function displayQ(question) {
 
 function endQuiz() {
   // stop timer
-  clearInterval(timerInterval)
+  clearInterval(timerInterval);
   // display timer
   timerEl.textContent = `Time: ${timer}`;
   // display end screen
@@ -174,6 +174,8 @@ function evalAns(event) {
       feedback.textContent =
         `wrong, the correct answer was ${questions[num].correctAns}.`;
       timer -= 10;
+      // display timer change
+      timerEl.textContent = `Time: ${timer}`;
     }
     num++; // advances to next question
     if (questions[num]) {
