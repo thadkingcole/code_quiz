@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coding Quiz</title>
+  <title>JavaScript Quiz</title>
 
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -15,6 +15,7 @@
 </head>
 
 <body>
+
   <!-- Persistent Header -->
   <header class="container-fluid mb-5">
     <!-- View HighScores -->
@@ -22,24 +23,28 @@
     <!-- Timer (right side of page) -->
     <p id="timer" class="float-right">Time: 0</p>
   </header>
-
+  <!-- End Header -->
+  <!-- Start main content -->
   <main class="container">
 
     <!-- Intro Screen -->
     <div id="intro" class="row">
       <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
         <!-- Intro Statement -->
-        <h1 class="text-center">Coding Quiz Challenge</h1>
+        <h1 class="text-center">JavaScript Coding Quiz</h1>
         <p class="text-justify">
-          Try to answer the following code related questions within the time limit.
-          Keep in mind that incorrect answers will penalize your score/time by ten seconds!
+          Try to answer the following 10 JavaScript related questions within the time limit.
+          Your score is based on how quickly you answer all 10 questions.
+          Keep in mind that incorrect answers will penalize your time by 10
+          seconds.
+          Are you ready? Click the "Start Quiz" button below to begin!
         </p>
         <!-- Start Quiz Button -->
         <button id="start" type="button" class="btn btn-primary mx-auto d-block">Start Quiz</button>
       </div>
     </div>
 
-    <!-- Quiz Screen(s) -->
+    <!-- Quiz Screen -->
     <div id="quiz" class="row">
       <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
         <!-- Question -->

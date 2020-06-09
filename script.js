@@ -105,9 +105,9 @@ const questions = { // questions
   endEl = document.getElementById("end"),
   highscoresEl = document.getElementById("highscores");
 
-let timer = 75,
-  num = 0,
-  score = 0;
+let timer = 100, // overall time limit
+  timerInterval, // will be name of timer function interval
+  num = 0; // question number
 
 
 // FUNCTIONS
@@ -148,46 +148,23 @@ function displayQ(question) {
 
 
 function endQuiz() {
+  // stop timer
+  clearInterval(timerInterval)
+  // display timer
+  timerEl.textContent = `Time: ${timer}`;
   // display end screen
   endEl.style.display = "flex";
   // hide all other screens
   introEl.style.display = "none";
   quizEl.style.display = "none";
   highscoresEl.style.display = "none";
+  // display final score
   document.getElementById("final-score").textContent =
     `Your final score is ${timer}`;
 }
 
 
-function startQuiz() {
-  // bootstrap rows use flex, displays quiz screen
-  quizEl.style.display = "flex";
-  // hides all other screens
-  introEl.style.display = "none";
-  endEl.style.display = "none";
-  highscoresEl.style.display = "none";
-  // start timer
-  timer = 75;
-  timerEl.textContent = `Time: ${timer}`;
-  const timerInterval = setInterval(function () {
-    timer--;
-    timerEl.textContent = `Time: ${timer}`;
-    if (timer === 0) {
-      clearInterval(timerInterval);
-      endQuiz();
-    } else if (!questions[num]) {
-      score += timer;
-      clearInterval(timerInterval);
-
-    }
-  }, 1000);
-  displayQ(questions[num]);
-}
-
-
-// EVENT LISTENERS
-startBtnEl.addEventListener("click", startQuiz);
-quizEl.addEventListener("click", function (event) {
+function evalAns(event) {
   if (event.target.matches("button")) {
     const selectedAns = event.target.textContent;
     const feedback = document.getElementById("feedback");
@@ -198,12 +175,44 @@ quizEl.addEventListener("click", function (event) {
         `wrong, the correct answer was ${questions[num].correctAns}.`;
       timer -= 10;
     }
-    num++;
+    num++; // advances to next question
     if (questions[num]) {
       displayQ(questions[num]);
     } else {
       endQuiz();
     }
   }
-});
+}
+
+
+function startTimer() {
+  timer--;
+  timerEl.textContent = `Time: ${timer}`;
+  if (timer <= 0) {
+    // timer could be less than 0 when wrong ans subtacts 10
+    // in any case, show timer is 0
+    timer = 0;
+    endQuiz();
+  }
+}
+
+
+function startQuiz() {
+  // bootstrap rows use flex, displays quiz screen
+  quizEl.style.display = "flex";
+  // hides all other screens
+  introEl.style.display = "none";
+  endEl.style.display = "none";
+  highscoresEl.style.display = "none";
+  // put time on clock
+  timerEl.textContent = `Time: ${timer}`;
+  // start timer
+  timerInterval = setInterval(startTimer, 1000);
+  displayQ(questions[num]);
+}
+
+
+// EVENT LISTENERS
+startBtnEl.addEventListener("click", startQuiz);
+quizEl.addEventListener("click", function (event) { evalAns(event); });
 
