@@ -25,7 +25,7 @@
   </header>
   <!-- End Header -->
   <!-- Start main content -->
-  <main class="container">
+  <main class="container mb-5">
 
     <!-- Intro Screen -->
     <div id="intro" class="row">
@@ -37,7 +37,9 @@
           Your score is based on how quickly you answer all 10 questions.
           Keep in mind that incorrect answers will penalize your time by 10
           seconds.
-          Are you ready? Click the "Start Quiz" button below to begin!
+          Are you ready?
+          Click the "Start Quiz" button below to begin!
+          Good luck!
         </p>
         <!-- Start Quiz Button -->
         <button id="start" type="button" class="btn btn-primary mx-auto d-block">Start Quiz</button>
@@ -70,7 +72,7 @@
         <form class="form-inline">
           <label for="initials">Enter initials:</label>
           <input type="text" class="form-control mx-1" placeholder="abc" id="initials">
-          <button id="initials" type="submit" class="btn btn-primary">Submit</button>
+          <button id="submit-highscore" type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>
@@ -82,26 +84,26 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th class="text-center">Highscores</th>
+              <th class="text-center" colspan="2">Highscores</th>
             </tr>
           </thead>
-          <tbody id="scores">
-            <!-- <tr>
+          <tbody>
+            <tr class="scores">
               <td>tjc</td>
               <td>69</td>
             </tr>
-            <tr>
+            <tr class="scores">
               <td>sas</td>
               <td>18</td>
             </tr>
-            <tr>
+            <tr class="scores">
               <td>ljc</td>
               <td>12</td>
             </tr>
-            <tr>
+            <tr class="scores">
               <td>lol</td>
               <td>0</td>
-            </tr> -->
+            </tr>
           </tbody>
         </table>
         <!-- Go Back/Home Button -->

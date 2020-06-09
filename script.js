@@ -29,8 +29,9 @@
   DONE: create function for correct answer response
   DONE: create function for incorrect answer response
   DONE: create function for end of game
-  todo: create function for entering high score initials
-  todo: create function for displaying high scores
+  DONE: create function for entering high score initials
+  DONE: create function for displaying high scores
+  todo: save highscores to localstorage
   todo: create function for erasing high scores
 */
 
@@ -94,20 +95,25 @@ const questions = { // questions
 },
   // Elements
   timerEl = document.getElementById("timer"),
+  scoresEl = document.getElementsByClassName("scores"), // array of highscores
   // Buttons
-  startBtnEl = document.getElementById("start"),
-  initialsBtnEl = document.getElementById("initials"),
-  homeBtnEl = document.getElementById("home"),
-  clearBtnEl = document.getElementById("clear"),
+  startBtn = document.getElementById("start"),
+  submitHighscoreBtn = document.getElementById("submit-highscore"),
+  homeBtn = document.getElementById("home"),
+  clearBtn = document.getElementById("clear"),
   // Screens
   introEl = document.getElementById("intro"),
-  quizEl = document.getElementById("quiz"),
+  quizEl = document.getElementById("quiz"), // also used for answer buttons
   endEl = document.getElementById("end"),
-  highscoresEl = document.getElementById("highscores");
+  highscoresEl = document.getElementById("highscores"),
+  // Inputs
+  initalsInput = document.getElementById("initials");
+
 
 let timer = 100, // overall time limit
   timerInterval, // will be name of timer function interval
-  num = 0; // question number
+  num = 0, // question number
+  newInitials = "anon";
 
 
 // FUNCTIONS
@@ -206,7 +212,7 @@ function startQuiz() {
   introEl.style.display = "none";
   endEl.style.display = "none";
   highscoresEl.style.display = "none";
-  // put time on clock
+  // show time on clock
   timerEl.textContent = `Time: ${timer}`;
   // start timer
   timerInterval = setInterval(startTimer, 1000);
@@ -214,7 +220,49 @@ function startQuiz() {
 }
 
 
-// EVENT LISTENERS
-startBtnEl.addEventListener("click", startQuiz);
-quizEl.addEventListener("click", function (event) { evalAns(event); });
+function submitHighscore(event) {
+  event.preventDefault();
+  newInitials = initalsInput.value.trim();
+  // create new elements for highscore table
+  const newRowEl = document.createElement("tr");
+  const newInitialsEl = document.createElement("td");
+  const newScoreEl = document.createElement("td");
+  // add "scores" class to new row
+  newRowEl.className = "scores";
+  // add data to table elements
+  if (newInitials) { // use entered initials
+    newInitialsEl.textContent = newInitials;
+  } else {
+    newInitialsEl.textContent = "anon";
+  }
+  newScoreEl.textContent = timer;
+  // add table data to created row
+  newRowEl.appendChild(newInitialsEl);
+  newRowEl.appendChild(newScoreEl);
+  // insert table row
+  if (scoresEl.length) {
+    for (let i = 0; i < scoresEl.length; i++) {
+      if (timer > scoresEl[i].lastElementChild.textContent) {
+        scoresEl[i].insertAdjacentElement("beforebegin", newRowEl);
+        break;
+      }
+    }
+    if (timer < scoresEl[scoresEl.length - 1].lastElementChild.textContent) {
+      scoresEl[scoresEl.length - 1].insertAdjacentElement("afterend", newRowEl);
+    }
+  }
+  // show highscore screen
+  highscoresEl.style.display = "flex";
+  // hide other screens
+  introEl.style.display = "none";
+  quizEl.style.display = "none";
+  endEl.style.display = "none";
+}
 
+
+// EVENT LISTENERS
+startBtn.addEventListener("click", startQuiz);
+quizEl.addEventListener("click", function (event) { evalAns(event); });
+submitHighscoreBtn.addEventListener("click", function (event) {
+  submitHighscore(event);
+});
