@@ -189,7 +189,7 @@ quizEl.addEventListener("click", function (event) {
     }
     num++;
     if (questions[num]) {
-      displayQ(questions[num])
+      displayQ(questions[num]);
     } else {
       endQuiz();
     }
