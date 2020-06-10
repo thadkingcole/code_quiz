@@ -80,6 +80,7 @@ const questions = {
   // Elements
   timerEl = document.getElementById("timer"),
   scoresEl = document.getElementsByClassName("scores"), // array of highscores
+  highEl = document.getElementById("high"), // where highscores go
   // Buttons
   startBtn = document.getElementById("start"),
   submitHighscoreBtn = document.getElementById("submit-highscore"),
@@ -234,8 +235,10 @@ function submitHighscore(event) {
       scoresEl[scoresEl.length - 1].insertAdjacentElement("afterend", newRowEl);
     }
   } else {
-    document.getElementsByTagName("tbody")[0].appendChild(newRowEl);
+    highEl.appendChild(newRowEl);
   }
+  // save highscores to localstorage
+  localStorage.setItem("highscores", highEl.innerHTML);
   // show highscore screen
   highscoresEl.style.display = "flex";
   // hide other screens
@@ -246,8 +249,13 @@ function submitHighscore(event) {
 
 function loadHighscores() {
   // load highscores from local storage
-  
-  // then add them to the table
+  const highscores = localStorage.getItem("highscores");
+
+  // if highscores exist...
+  if (highscores) {
+    // add them to the table
+    highEl.innerHTML = highscores;
+  }
 }
 
 // MAIN PROGRAM
