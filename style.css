@@ -1,6 +1,6 @@
 /* Hide elements associated with questions, end of quiz, and high scores */
-/* #quiz,
+#quiz,
 #end,
 #highscores {
   display: none;
-} */
+}
