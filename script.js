@@ -68,7 +68,7 @@ const questions = {
       wrongAns: ["Math.randInt(1, 10)", "Math.random() * 10", "random(1, 10)"],
       correctAns: "Math.floor(Math.random() * 10) + 1",
     },
-    total: 10,
+    total: 3,
   },
   // Elements
   timerEl = document.getElementById("timer"),
@@ -89,12 +89,11 @@ const questions = {
   highscoresEl = document.getElementById("highscores"),
   // Inputs
   initalsInput = document.getElementById("initials");
-let timer = 100, // overall time limit
+let questNums = [...Array(questions.total).keys()], // array 0 to num of questions
+  timer = 10 * questNums.length, // overall time limit
   timerInterval, // will be name of timer function interval
   num = 1, // question number
-  newInitials = "anon",
-  // array from 0 to number of questions
-  questNums = [...Array(questions.total).keys()];
+  newInitials = "anon";
 
 // FUNCTIONS
 function displayQ(question) {
@@ -124,6 +123,10 @@ function displayQ(question) {
 function endQuiz() {
   // stop timer
   clearInterval(timerInterval);
+  // set negative scores to 0
+  if (timer < 0) {
+    timer = 0;
+  }
   // display timer
   timerEl.textContent = `Time: ${timer}`;
   // display end screen
@@ -185,7 +188,7 @@ function startQuiz() {
   // hide answer feedback for repeat quiz starts
   feedbackEl.style.display = "none";
   // show time on clock
-  timer = 100;
+  timer = questNums.length * 10;
   timerEl.textContent = `Time: ${timer}`;
   // start timer
   timerInterval = setInterval(startTimer, 1000);
