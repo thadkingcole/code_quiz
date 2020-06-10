@@ -68,7 +68,7 @@ const questions = {
       wrongAns: ["Math.randInt(1, 10)", "Math.random() * 10", "random(1, 10)"],
       correctAns: "Math.floor(Math.random() * 10) + 1",
     },
-    total: 3,
+    total: 10,
   },
   // Elements
   timerEl = document.getElementById("timer"),
@@ -237,7 +237,7 @@ function submitHighscore(event) {
   // insert table row
   if (scoresEl.length) {
     for (let i = 0; i < scoresEl.length; i++) {
-      if (timer > scoresEl[i].lastElementChild.textContent) {
+      if (timer >= scoresEl[i].lastElementChild.textContent) {
         scoresEl[i].insertAdjacentElement("beforebegin", newRowEl);
         break;
       }
