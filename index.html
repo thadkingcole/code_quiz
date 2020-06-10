@@ -1,106 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Quiz</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JavaScript Quiz</title>
+    <!-- Bootstrap CSS CDN -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
 
-  <!-- Bootstrap CSS CDN -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- MY CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-  <!-- MY CSS -->
-  <link rel="stylesheet" href="style.css">
-</head>
+  <body>
+    <!-- Persistent Header -->
+    <header class="container-fluid mb-5">
+      <!-- View HighScores -->
+      <a href="#">View Highscores</a>
+      <!-- Timer (right side of page) -->
+      <p id="timer" class="float-right">Time: 0</p>
+    </header>
 
-<body>
-
-  <!-- Persistent Header -->
-  <header class="container-fluid mb-5">
-    <!-- View HighScores -->
-    <a href="#">View Highscores</a>
-    <!-- Timer (right side of page) -->
-    <p id="timer" class="float-right">Time: 0</p>
-  </header>
-  <!-- End Header -->
-  <!-- Start main content -->
-  <main class="container mb-5">
-
-    <!-- Intro Screen -->
-    <div id="intro" class="row">
-      <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
-        <!-- Intro Statement -->
-        <h1 class="text-center">JavaScript Coding Quiz</h1>
-        <p class="text-justify">
-          Try to answer the following 10 JavaScript related questions within the time limit.
-          Your score is based on how quickly you answer all 10 questions.
-          Keep in mind that incorrect answers will penalize your time by 10
-          seconds.
-          Are you ready?
-          Click the "Start Quiz" button below to begin!
-          Good luck!
-        </p>
-        <!-- Start Quiz Button -->
-        <button id="start" type="button" class="btn btn-primary mx-auto d-block">Start Quiz</button>
+    <!-- Start main content -->
+    <main class="container mb-5">
+      <!-- Intro Screen -->
+      <div id="intro" class="row">
+        <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
+          <!-- Intro Statement -->
+          <h1 class="text-center">JavaScript Coding Quiz</h1>
+          <p class="text-justify">
+            Try to answer the following 10 JavaScript related questions within
+            the time limit. Your score is based on how quickly you answer all 10
+            questions. Keep in mind that incorrect answers will penalize your
+            time by 10 seconds. Are you ready? Click the "Start Quiz" button
+            below to begin! Good luck!
+          </p>
+          <!-- Start Quiz Button -->
+          <button
+            id="start"
+            type="button"
+            class="btn btn-primary mx-auto d-block"
+          >
+            Start Quiz
+          </button>
+        </div>
       </div>
-    </div>
 
-    <!-- Quiz Screen -->
-    <div id="quiz" class="row">
-      <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
-        <!-- Question -->
-        <h2 id="question">What is a placeholder question?</h2>
-        <!-- Answers -->
-        <button id="answer0" type="button" class="btn btn-primary my-1">answer 1</button><br>
-        <button id="answer1" type="button" class="btn btn-primary my-1">answer 2</button><br>
-        <button id="answer2" type="button" class="btn btn-primary my-1">answer 3</button><br>
-        <button id="answer3" type="button" class="btn btn-primary my-1">answer 4</button>
-        <hr>
-        <p id="feedback"></p>
-        <!-- Last Question Feedback (correct/wrong) -->
+      <!-- Quiz Screen -->
+      <div id="quiz" class="row">
+        <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
+          <!-- Question -->
+          <h2 id="question">What is a placeholder question?</h2>
+          <!-- Answers -->
+          <button id="answer0" type="button" class="btn btn-primary my-1">
+            answer 1</button
+          ><br />
+          <button id="answer1" type="button" class="btn btn-primary my-1">
+            answer 2</button
+          ><br />
+          <button id="answer2" type="button" class="btn btn-primary my-1">
+            answer 3</button
+          ><br />
+          <button id="answer3" type="button" class="btn btn-primary my-1">
+            answer 4
+          </button>
+          <hr />
+          <p id="feedback"></p>
+          <!-- Last Question Feedback (correct/wrong) -->
+        </div>
       </div>
-    </div>
 
-    <!-- End of Quiz Screen -->
-    <div id="end" class="row">
-      <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
-        <h3>All done!</h3>
-        <!-- User Score -->
-        <p id="final-score">Your final score is XX.</p>
-        <!-- Enter Initials -->
-        <form class="form-inline">
-          <label for="initials">Enter initials:</label>
-          <input type="text" class="form-control mx-1" placeholder="abc" id="initials">
-          <button id="submit-highscore" type="submit" class="btn btn-primary">Submit</button>
-        </form>
+      <!-- End of Quiz Screen -->
+      <div id="end" class="row">
+        <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
+          <h3>All done!</h3>
+          <!-- User Score -->
+          <p id="final-score">Your final score is XX.</p>
+          <!-- Enter Initials -->
+          <form class="form-inline">
+            <label for="initials">Enter initials:</label>
+            <input
+              type="text"
+              class="form-control mx-1"
+              placeholder="abc"
+              id="initials"
+            />
+            <button id="submit-highscore" type="submit" class="btn btn-primary">
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
 
-    <!-- High Scores -->
-    <div id="highscores" class="row">
-      <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
-        <!-- <h4 class="text-center">Highscores</h4> -->
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th class="text-center" colspan="2">Highscores</th>
-            </tr>
-          </thead>
-          <tbody id="high">
-            <!-- where highscores go -->
-          </tbody>
-        </table>
-        <!-- Go Back/Home Button -->
-        <button id="home" type="button" class="btn btn-primary">Go Back</button>
-        <!-- Clear High Scores-->
-        <button id="clear" type="button" class="btn btn-primary">Clear Highscores</button>
+      <!-- High Scores -->
+      <div id="highscores" class="row">
+        <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
+          <!-- <h4 class="text-center">Highscores</h4> -->
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="text-center" colspan="2">Highscores</th>
+              </tr>
+            </thead>
+            <tbody id="high">
+              <!-- where highscores go -->
+            </tbody>
+          </table>
+          <!-- Go Back/Home Button -->
+          <button id="home" type="button" class="btn btn-primary">
+            Go Back
+          </button>
+          <!-- Clear High Scores-->
+          <button id="clear" type="button" class="btn btn-primary">
+            Clear Highscores
+          </button>
+        </div>
       </div>
-    </div>
-  </main>
+    </main>
 
-  <!-- My JavaScript -->
-  <script src="script.js"></script>
-</body>
-
+    <!-- My JavaScript -->
+    <script src="script.js"></script>
+  </body>
 </html>

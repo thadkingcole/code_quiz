@@ -23,6 +23,7 @@
   -----TODO LIST-----
   doin: create question objects with a question string & array of 4 answers
   doin: create/find coding questions
+  todo: randomize order questions appear
   DONE: create timer
   DONE: create function for starting quiz
   DONE: create function to display question
@@ -31,8 +32,10 @@
   DONE: create function for end of game
   DONE: create function for entering high score initials
   DONE: create function for displaying high scores
-  todo: save highscores to localstorage
+  DONE: save highscores to localstorage
+  DONE: home button goes to intro page
   todo: create function for erasing high scores
+  todo: create function for displaying high scores from persistent header link
 */
 
 // GLOBAL VARIABLES
@@ -258,6 +261,15 @@ function loadHighscores() {
   }
 }
 
+function goHome() {
+  // display intro screen
+  introEl.style.display = "flex";
+  //hide other screens
+  quizEl.style.display = "none";
+  endEl.style.display = "none";
+  highscoresEl.style.display = "none";
+}
+
 // MAIN PROGRAM
 loadHighscores();
 
@@ -269,3 +281,4 @@ quizEl.addEventListener("click", function (event) {
 submitHighscoreBtn.addEventListener("click", function (event) {
   submitHighscore(event);
 });
+homeBtn.addEventListener("click", goHome);
