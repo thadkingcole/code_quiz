@@ -35,7 +35,7 @@
   DONE: save highscores to localstorage
   DONE: home button goes to intro page
   DONE: create function for erasing high scores
-  todo: create function for displaying high scores from persistent header link
+  DONE: create function for displaying high scores from persistent header link
   DONE: add feedback to end page for last question
 */
 
@@ -77,6 +77,7 @@ const questions = {
   highEl = document.getElementById("high"), // where highscores go
   feedbackEl = document.getElementById("feedback"),
   lastFeedbackEl = document.getElementById("last-feedback"),
+  highscoreLinkEl = document.getElementById("highscore-link"),
   // Buttons
   startBtn = document.getElementById("start"),
   submitHighscoreBtn = document.getElementById("submit-highscore"),
@@ -136,7 +137,7 @@ function endQuiz() {
     "final-score"
   ).textContent = `Your final score is ${timer}`;
   // display final question feedback
-  lastFeedbackEl.textContent = feedbackEl.textContent
+  lastFeedbackEl.textContent = feedbackEl.textContent;
 }
 
 function evalAns(event) {
@@ -197,6 +198,19 @@ function startQuiz() {
   displayQ(questions[questNums[num]]);
 }
 
+function showHighscores() {
+  // stop timer
+  clearInterval(timerInterval);
+  // display timer
+  timerEl.textContent = `Time: ${timer}`;
+  // show highscore screen
+  highscoresEl.style.display = "flex";
+  // hide other screens
+  introEl.style.display = "none";
+  quizEl.style.display = "none";
+  endEl.style.display = "none";
+}
+
 function submitHighscore(event) {
   event.preventDefault();
   newInitials = initalsInput.value.trim();
@@ -234,11 +248,7 @@ function submitHighscore(event) {
   // save highscores to localstorage
   localStorage.setItem("highscores", highEl.innerHTML);
   // show highscore screen
-  highscoresEl.style.display = "flex";
-  // hide other screens
-  introEl.style.display = "none";
-  quizEl.style.display = "none";
-  endEl.style.display = "none";
+  showHighscores();
 }
 
 function loadHighscores() {
@@ -279,3 +289,4 @@ submitHighscoreBtn.addEventListener("click", function (event) {
 });
 homeBtn.addEventListener("click", goHome);
 clearBtn.addEventListener("click", clearHighscores);
+highscoreLinkEl.addEventListener("click", showHighscores);
