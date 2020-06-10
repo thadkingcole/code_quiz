@@ -5,10 +5,10 @@
   clicking any button will display the next question
   
   if [correct answer] is clicked...
-    "correct" will be displayed below the next question's answers
+  "correct" will be displayed below the next question's answers
   if [incorrect answer] is clicked...
-    "wrong, correct answer is _______"
-    will be displayed below the next question's answers
+  "wrong, correct answer is _______"
+  will be displayed below the next question's answers
 
   quiz continues until there are no more questions or time reaches 0
 
@@ -36,63 +36,47 @@
 */
 
 // GLOBAL VARIABLES
-const questions = { // questions
-  0: {
-    mark: "Commonly used data types DO NOT include:",
-    wrongAns: [
-      "strings",
-      "booleans",
-      "numbers"
-    ],
-    correctAns: "alerts",
-    asked: false,
-    orderMatters: false
+const questions = {
+    // questions
+    1: {
+      mark: "Commonly used data types DO NOT include:",
+      wrongAns: ["strings", "booleans", "numbers"],
+      correctAns: "alerts",
+      asked: false,
+      orderMatters: false,
+    },
+    2: {
+      mark:
+        "The condition in an if/else statement is enclosed within _________.",
+      wrongAns: ["quotes", "curley brackets", "square brackets"],
+      correctAns: "parentheses",
+      asked: false,
+      orderMatters: false,
+    },
+    3: {
+      mark: "Arrays in JavaScript can be used to store _________.",
+      wrongAns: ["numbers and strings", "other arrays", "booleans"],
+      correctAns: "all of the above",
+      asked: false,
+      orderMatters: true,
+    },
+    4: {
+      mark:
+        "String values must be enclosed within _________ when being assigned to variables.",
+      wrongAns: ["commas", "curley brackets", "paratheses"],
+      correctAns: "quotes",
+      asked: false,
+      orderMatters: false,
+    },
+    5: {
+      mark:
+        "A very useful tool used during development and debugging for printing content to the debugger is:",
+      wrongAns: ["JavaScript", "terminal/bash", "for loops"],
+      correctAns: "console.log()",
+      asked: false,
+      orderMatters: false,
+    },
   },
-  1: {
-    mark: "The condition in an if/else statement is enclosed within _________.",
-    wrongAns: [
-      "quotes",
-      "curley brackets",
-      "square brackets"
-    ],
-    correctAns: "parentheses",
-    asked: false,
-    orderMatters: false
-  },
-  2: {
-    mark: "Arrays in JavaScript can be used to store _________.",
-    wrongAns: [
-      "numbers and strings",
-      "other arrays",
-      "booleans"
-    ],
-    correctAns: "all of the above",
-    asked: false,
-    orderMatters: true
-  },
-  3: {
-    mark: "String values must be enclosed within _________ when being assigned to variables.",
-    wrongAns: [
-      "commas",
-      "curley brackets",
-      "paratheses"
-    ],
-    correctAns: "quotes",
-    asked: false,
-    orderMatters: false
-  },
-  4: {
-    mark: "A very useful tool used during development and debugging for printing content to the debugger is:",
-    wrongAns: [
-      "JavaScript",
-      "terminal/bash",
-      "for loops"
-    ],
-    correctAns: "console.log()",
-    asked: false,
-    orderMatters: false
-  },
-},
   // Elements
   timerEl = document.getElementById("timer"),
   scoresEl = document.getElementsByClassName("scores"), // array of highscores
@@ -109,12 +93,10 @@ const questions = { // questions
   // Inputs
   initalsInput = document.getElementById("initials");
 
-
 let timer = 100, // overall time limit
   timerInterval, // will be name of timer function interval
-  num = 0, // question number
+  num = 1, // question number
   newInitials = "anon";
-
 
 // FUNCTIONS
 function displayQ(question) {
@@ -123,7 +105,9 @@ function displayQ(question) {
   let answers = question.wrongAns;
   if (question.orderMatters) {
     // shuffles answers
-    answers.sort(function (a, b) { return 0.5 - Math.random(); });
+    answers.sort(function (a, b) {
+      return 0.5 - Math.random();
+    });
 
     // display answers in buttons
     for (let i = 0; i < answers.length; i++) {
@@ -133,7 +117,8 @@ function displayQ(question) {
     // ensures "all of the above" type answers are is last answer
     document.getElementById(`answer${answers.length}`).textContent =
       question.correctAns;
-  } else { // order doesn't matter, shuffle all answers
+  } else {
+    // order doesn't matter, shuffle all answers
     // ansPos is random number between 0 & index of answers for each question
     const ansPos = Math.floor(Math.random() * question.wrongAns.length);
 
@@ -141,7 +126,9 @@ function displayQ(question) {
     answers.splice(ansPos, 0, question.correctAns);
 
     // answers randomly shuffled
-    answers.sort(function (a, b) { return 0.5 - Math.random(); });
+    answers.sort(function (a, b) {
+      return 0.5 - Math.random();
+    });
 
     // display answers in buttons
     for (let i = 0; i < answers.length; i++) {
@@ -151,7 +138,6 @@ function displayQ(question) {
   // mark question as asked
   question.asked = true;
 }
-
 
 function endQuiz() {
   // stop timer
@@ -165,10 +151,10 @@ function endQuiz() {
   quizEl.style.display = "none";
   highscoresEl.style.display = "none";
   // display final score
-  document.getElementById("final-score").textContent =
-    `Your final score is ${timer}`;
+  document.getElementById(
+    "final-score"
+  ).textContent = `Your final score is ${timer}`;
 }
-
 
 function evalAns(event) {
   if (event.target.matches("button")) {
@@ -177,8 +163,7 @@ function evalAns(event) {
     if (selectedAns === questions[num].correctAns) {
       feedback.textContent = "correct!";
     } else {
-      feedback.textContent =
-        `wrong, the correct answer was ${questions[num].correctAns}.`;
+      feedback.textContent = `wrong, the correct answer was ${questions[num].correctAns}.`;
       timer -= 10;
       // display timer change
       timerEl.textContent = `Time: ${timer}`;
@@ -192,7 +177,6 @@ function evalAns(event) {
   }
 }
 
-
 function startTimer() {
   timer--;
   timerEl.textContent = `Time: ${timer}`;
@@ -203,7 +187,6 @@ function startTimer() {
     endQuiz();
   }
 }
-
 
 function startQuiz() {
   // bootstrap rows use flex, displays quiz screen
@@ -219,7 +202,6 @@ function startQuiz() {
   displayQ(questions[num]);
 }
 
-
 function submitHighscore(event) {
   event.preventDefault();
   newInitials = initalsInput.value.trim();
@@ -230,7 +212,8 @@ function submitHighscore(event) {
   // add "scores" class to new row
   newRowEl.className = "scores";
   // add data to table elements
-  if (newInitials) { // use entered initials
+  if (newInitials) {
+    // use entered initials
     newInitialsEl.textContent = newInitials;
   } else {
     newInitialsEl.textContent = "anon";
@@ -250,6 +233,8 @@ function submitHighscore(event) {
     if (timer < scoresEl[scoresEl.length - 1].lastElementChild.textContent) {
       scoresEl[scoresEl.length - 1].insertAdjacentElement("afterend", newRowEl);
     }
+  } else {
+    document.getElementsByTagName("tbody")[0].appendChild(newRowEl);
   }
   // show highscore screen
   highscoresEl.style.display = "flex";
@@ -259,10 +244,20 @@ function submitHighscore(event) {
   endEl.style.display = "none";
 }
 
+function loadHighscores() {
+  // load highscores from local storage
+  
+  // then add them to the table
+}
+
+// MAIN PROGRAM
+loadHighscores();
 
 // EVENT LISTENERS
 startBtn.addEventListener("click", startQuiz);
-quizEl.addEventListener("click", function (event) { evalAns(event); });
+quizEl.addEventListener("click", function (event) {
+  evalAns(event);
+});
 submitHighscoreBtn.addEventListener("click", function (event) {
   submitHighscore(event);
 });
