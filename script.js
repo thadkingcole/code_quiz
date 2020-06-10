@@ -90,7 +90,7 @@ const questions = {
   // Inputs
   initalsInput = document.getElementById("initials");
 let questNums = [...Array(questions.total).keys()], // array 0 to num of questions
-  timer = 10 * questNums.length, // overall time limit
+  timer = 100, // overall time limit
   timerInterval, // will be name of timer function interval
   num = 1, // question number
   newInitials = "anon";
@@ -188,7 +188,7 @@ function startQuiz() {
   // hide answer feedback for repeat quiz starts
   feedbackEl.style.display = "none";
   // show time on clock
-  timer = questNums.length * 10;
+  timer = 100;
   timerEl.textContent = `Time: ${timer}`;
   // start timer
   timerInterval = setInterval(startTimer, 1000);
