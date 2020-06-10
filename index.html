@@ -30,7 +30,7 @@
     <main class="container mb-5">
       <!-- Intro Screen -->
       <div id="intro" class="row">
-        <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
+        <div class="col-12 col-md-8 col-lg-6 mx-auto d-block">
           <!-- Intro Statement -->
           <h1 class="text-center">JavaScript Coding Quiz</h1>
           <p class="text-justify">
@@ -53,7 +53,7 @@
 
       <!-- Quiz Screen -->
       <div id="quiz" class="row">
-        <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
+        <div class="col-12 col-md-8 col-lg-6 mx-auto d-block">
           <!-- Question -->
           <h2 id="question">What is a placeholder question?</h2>
           <!-- Answers -->
@@ -77,7 +77,7 @@
 
       <!-- End of Quiz Screen -->
       <div id="end" class="row">
-        <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
+        <div class="col-12 col-md-8 col-lg-6 mx-auto d-block">
           <h3>All done!</h3>
           <!-- User Score -->
           <p id="final-score">Your final score is XX.</p>
@@ -90,7 +90,11 @@
               placeholder="abc"
               id="initials"
             />
-            <button id="submit-highscore" type="submit" class="btn btn-primary">
+            <button
+              id="submit-highscore"
+              type="submit"
+              class="btn btn-primary my-1"
+            >
               Submit
             </button>
           </form>
@@ -101,8 +105,7 @@
 
       <!-- High Scores -->
       <div id="highscores" class="row">
-        <div class="col-11 col-md-8 col-lg-6 mx-auto d-block">
-          <!-- <h4 class="text-center">Highscores</h4> -->
+        <div class="col-12 col-md-8 col-lg-6 mx-auto d-block">
           <table class="table table-striped">
             <thead>
               <tr>
@@ -118,7 +121,7 @@
             Go Back
           </button>
           <!-- Clear High Scores-->
-          <button id="clear" type="button" class="btn btn-primary">
+          <button id="clear" type="button" class="btn btn-danger float-right">
             Clear Highscores
           </button>
         </div>
