@@ -72,8 +72,8 @@ const questions = {
   },
   // Elements
   timerEl = document.getElementById("timer"),
-  scoresEl = document.getElementsByClassName("scores"), // array of highscores
-  highEl = document.getElementById("high"), // where highscores go
+  scoresEl = document.getElementsByClassName("scores"), // array of high scores
+  highEl = document.getElementById("high"), // where high scores go
   feedbackEl = document.getElementById("feedback"),
   lastFeedbackEl = document.getElementById("last-feedback"),
   highscoreLinkEl = document.getElementById("highscore-link"),

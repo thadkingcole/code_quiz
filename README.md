@@ -9,7 +9,7 @@ A timed quiz of JavaScript coding questions using the HTML DOM API.
 This page features:
 
 - [x] dynamically updating HTML according to how the user interacts with the page.
-- [x] highscores saved in the browser's localstorage so that user can track progress or compare with friends.
+- [x] high scores saved in the browser's localstorage so that user can track progress or compare with friends.
 - [x] a fun way to test & improve your JavaScript knowledge.
 
 ## Table of Contents
@@ -31,10 +31,10 @@ No installation necessary! Try it out yourself by [clicking here](https://thadki
    1. Incorrect answers subtract 10 seconds from the clock.
    1. Your final score will be how much time is remaining on the clock when you answer the final question.
    1. If you run out of time prior to answering all questions, your final score will be 0.
-1. Enter your initials to save your score to the highscore table
-1. You can clear highscores at anytime by clicking the "clear highscores" button.
+1. Enter your initials to save your score to the high score table
+1. You can clear high scores at anytime by clicking the "clear high scores" button.
 
-![highscore page](./Assets/02_highscores.png)
+![high score page](./Assets/02_highscores.png)
 
 ## Additional Features
 
