@@ -1,44 +1,3 @@
-/*
-  Clicking start quiz displays first question and starts timer at 75 sec
-
-  each answer will be displayed as a [button]
-  clicking any button will display the next question
-  
-  if [correct answer] is clicked...
-  "correct" will be displayed below the next question's answers
-  if [incorrect answer] is clicked...
-  "wrong, correct answer is _______"
-  will be displayed below the next question's answers
-
-  quiz continues until there are no more questions or time reaches 0
-
-  once quiz ends, user's score will be displayed along with a form to enter intials
-
-  submiting initials will display high scores,
-  a [Go Back] button, and a [Clear High Scores] button
-
-  [Go Back] will show intro page
-  [Clear High Scores] will remove all high scores
-
-  -----TODO LIST-----
-  doin: create question objects with a question string & array of 4 answers
-  doin: create/find coding questions
-  DONE: randomize order questions appear
-  DONE: create timer
-  DONE: create function for starting quiz
-  DONE: create function to display question
-  DONE: create function for correct answer response
-  DONE: create function for incorrect answer response
-  DONE: create function for end of game
-  DONE: create function for entering high score initials
-  DONE: create function for displaying high scores
-  DONE: save highscores to localstorage
-  DONE: home button goes to intro page
-  DONE: create function for erasing high scores
-  DONE: create function for displaying high scores from persistent header link
-  DONE: add feedback to end page for last question
-*/
-
 // GLOBAL VARIABLES
 const questions = {
     // questions
@@ -49,18 +8,18 @@ const questions = {
     },
     1: {
       mark:
-        "The condition in an if/else statement is enclosed within _________.",
+        "The condition in an if/else statement is enclosed within ___________.",
       wrongAns: ["quotes", "curley brackets", "square brackets"],
       correctAns: "parentheses",
     },
     2: {
-      mark: "How do you access the first element in an array named arr?",
+      mark: "How do you access the first element in an array named 'arr'?",
       wrongAns: ["arr[1]", "arr(0)", "arr{1}"],
       correctAns: "arr[0]",
     },
     3: {
       mark:
-        "String values must be enclosed within _________ when being assigned to variables.",
+        "String values must be enclosed within ______ when being assigned to variables.",
       wrongAns: ["commas", "curley brackets", "paratheses"],
       correctAns: "quotes",
     },
@@ -70,6 +29,46 @@ const questions = {
       wrongAns: ["JavaScript", "terminal/bash", "for loops"],
       correctAns: "console.log()",
     },
+    5: {
+      mark: "Inside which HTML element do we put the JavaScript code?",
+      wrongAns: ["<javascript>", "<js>", "<scripting>"],
+      correctAns: "<script>",
+    },
+    6: {
+      mark:
+        "What is the correct syntax for referring to an external script called 'xxx.js'",
+      wrongAns: [
+        "<script href='xxx.js'>",
+        "<script name='xxx.js'>",
+        "<link script='xxx.js'>",
+      ],
+      correctAns: "<script src='xxx.js'>",
+    },
+    7: {
+      mark: "How do you create a function in JavaScript?",
+      wrongAns: [
+        "function:myFunction()",
+        "function = myFunction()",
+        "function(myFunction)",
+      ],
+      correctAns: "function myFunction()",
+    },
+    8: {
+      mark: "How can you add a comment in JavaScript",
+      wrongAns: [
+        "# This is a comment",
+        "' This is a comment",
+        "! This is a comment",
+      ],
+      correctAns: "// This is a comment",
+    },
+    9: {
+      mark:
+        "Which JavaScript expression will calculate a random number between 1 and 10?",
+      wrongAns: ["Math.randInt(1, 10)", "Math.random() * 10", "random(1, 10)"],
+      correctAns: "Math.floor(Math.random() * 10) + 1",
+    },
+    total: 10,
   },
   // Elements
   timerEl = document.getElementById("timer"),
@@ -94,7 +93,8 @@ let timer = 100, // overall time limit
   timerInterval, // will be name of timer function interval
   num = 1, // question number
   newInitials = "anon",
-  questNums = [...Array(5).keys()]; // array from 0 to 4
+  // array from 0 to number of questions
+  questNums = [...Array(questions.total).keys()];
 
 // FUNCTIONS
 function displayQ(question) {
@@ -278,8 +278,7 @@ function clearHighscores() {
 
 // MAIN PROGRAM
 loadHighscores();
-
-// EVENT LISTENERS
+// add event listeners
 startBtn.addEventListener("click", startQuiz);
 quizEl.addEventListener("click", function (event) {
   evalAns(event);
