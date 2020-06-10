@@ -36,7 +36,7 @@
   DONE: home button goes to intro page
   DONE: create function for erasing high scores
   todo: create function for displaying high scores from persistent header link
-  todo: 
+  DONE: add feedback to end page for last question
 */
 
 // GLOBAL VARIABLES
@@ -76,6 +76,7 @@ const questions = {
   scoresEl = document.getElementsByClassName("scores"), // array of highscores
   highEl = document.getElementById("high"), // where highscores go
   feedbackEl = document.getElementById("feedback"),
+  lastFeedbackEl = document.getElementById("last-feedback"),
   // Buttons
   startBtn = document.getElementById("start"),
   submitHighscoreBtn = document.getElementById("submit-highscore"),
@@ -134,6 +135,8 @@ function endQuiz() {
   document.getElementById(
     "final-score"
   ).textContent = `Your final score is ${timer}`;
+  // display final question feedback
+  lastFeedbackEl.textContent = feedbackEl.textContent
 }
 
 function evalAns(event) {
