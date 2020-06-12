@@ -36,7 +36,7 @@ const questions = {
     },
     6: {
       mark:
-        "What is the correct syntax for referring to an external script called 'xxx.js'",
+        "What is the correct syntax for referring to an external script called 'xxx.js'?",
       wrongAns: [
         "<script href='xxx.js'>",
         "<script name='xxx.js'>",
@@ -54,7 +54,7 @@ const questions = {
       correctAns: "function myFunction()",
     },
     8: {
-      mark: "How can you add a comment in JavaScript",
+      mark: "How can you add a comment in JavaScript?",
       wrongAns: [
         "# This is a comment",
         "' This is a comment",
